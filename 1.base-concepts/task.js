@@ -13,7 +13,6 @@ function solveEquation(a, b, c) {
     const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
     return [x1, x2];
   }
-
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
