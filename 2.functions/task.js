@@ -1,53 +1,91 @@
-// Задание 1
-function getArrayParams(arr) {
-  let min = arr[0];
-  let max = arr[0];
+function getArrayParams(...arr) {
+  let min = Infinity;
+  let max = -Infinity;
   let sum = 0;
-
+  let avg = 0;
   for (let i = 0; i < arr.length; i++) {
-    if (min > arr[i]) {
-      min = arr[i];
-    }
-    if (max < arr[i]) {
+    sum = sum + arr[i];
+    if (arr[i] > max) {
       max = arr[i];
     }
-
-    sum = sum + arr[i];
+    if (arr[i] < min) {
+      min = arr[i];
+    }
   }
-
-  let avg = sum / arr.length;
-  avg = Number(avg.toFixed(2));
-
+  avg = parseFloat((sum / arr.length).toFixed(2));
   return { min: min, max: max, avg: avg };
 }
 
-// Задание 2
-function worker(arr) {
-  let sum = 0;
+function summElementsWorker(...arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+let sum = 0;
+for (let i=0; i < arr.length; i++) {
+  sum += arr[i];
+}
+return sum;
+}
+
+function differenceMaxMinWorker(...arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  let min = Infinity;
+  let max = -Infinity;
+  for (let i = 0; i < arr.length; i++) {
+
+    if (arr[i] < min) {
+      min = arr[i];
+    }
+    else if (arr[i] > max) {
+        max = arr[i];
+    }
+  }
+  return (max - min);
+}
+
+function differenceEvenOddWorker(...arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  let sumEvenElement = 0;
+  let sumOddElement = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 !== 0) {
+      sumOddElement += arr[i];
+    } else if (arr[i] % 2 === 0) {
+      sumEvenElement += arr[i];
+    }
+  }
+  let diff = sumEvenElement - sumOddElement;
+  return diff;
+}
+
+function averageEvenElementsWorker(...arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  let sumEvenElement = 0;
+  let countEvenElement = 0;
 
   for (let i = 0; i < arr.length; i++) {
-    sum = sum + arr[i];
+    if (arr[i] % 2 === 0) {
+      sumEvenElement += arr[i];
+      countEvenElement++;
+    }
   }
-  return sum;
+  let aver = sumEvenElement / countEvenElement;
+  return aver;
 }
 
 function makeWork(arrOfArr, func) {
-
-  let sum = 0;
-  let max = func(arrOfArr[0]);
+  let maxWorkerResult = -Infinity;
   for (let i = 0; i < arrOfArr.length; i++) {
-
-    let sum = func(arrOfArr[i]);
-    if (max < sum) {
-      max = sum;
+    const result = func(...arrOfArr[i]);
+    if (result > maxWorkerResult) {
+      maxWorkerResult = result;
     }
-
-  } return max;
-}
-
-// Задание 3
-function worker2(arr) {
-  let arrayParams = getArrayParams(arr);
-  return Math.abs(arrayParams.max - arrayParams.min);
-
+  }
+  return maxWorkerResult;
 }
