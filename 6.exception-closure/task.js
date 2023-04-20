@@ -57,6 +57,7 @@ class Triangle {
     this._secondSideLength = second;
     this._thirdSideLength = third;
   }
+  
 
   get area() {
     const semiPerimeter = this.perimeter / 2;
